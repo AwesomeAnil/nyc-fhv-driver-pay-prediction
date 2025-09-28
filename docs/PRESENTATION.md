@@ -57,6 +57,27 @@ D --> F[Predictions on New Data]
 | Trip Distance   | Long-tail distribution      | Outlier removal essential   |
 | Passenger Count | Weak predictor              | Dropped as feature          |
 
+<ins>**Descriptive Stats - Initial Data**</ins> 
+
+![Descriptive Stats](/images/describe_stats.png)
+
+<ins>**Univariate - Driver Pay Distribution**</ins>
+
+![Univariate Pay Distributions](/images/Univariate_driver_pay.png)
+
+<ins>**Univariate - Base Passenger Fares Distribution**</ins> 
+
+![Univariate Fares Distribution](/images/Univariate_base_pax_fare.png)
+
+<ins>**Bivariate - Driver Pay Scatter Plots**</ins> 
+
+![Driver Pay Scatterokits](/images/bivariate_driver_pay_scatter_plots.png)
+
+<ins>**Bivariate - Driver Pay Box Plots**</ins> 
+
+![Driver Pay Boxplots](/images/bivariate_driver_pay_box_plots.png)
+
+
 📊 *[Attach histogram of trips by hour]*
 📊 *[Attach geospatial heatmap of pickup zones]*
 
@@ -68,6 +89,18 @@ D --> F[Predictions on New Data]
 * **Log transformation** of trip distance (reduce skew).
 * **Categorical encoding** of Vendor IDs & zones.
 * **Outlier filtering**: trips > 50 miles or > 2 hours removed.
+
+<ins>**Descriptive Stats after log-transformation and standard scaling**</ins> 
+
+![Descriptive Stats](/images/describe_stats_logtransformed_scaled.png)
+
+<ins>**Boxplots after transformations**</ins> 
+
+![Boxplots after data transformations](/images/univariate_boxplots_logtransformed_scaled.png)
+
+<ins>**Feature correlations heat map**</ins>
+
+![Correlations heat map](/images/Correlations_heat_map.png)
 
 ✨ *Cleaner, business-aligned features powering better predictions.*
 
