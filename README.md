@@ -114,3 +114,26 @@ This repo contains an end-to-end ML pipeline built to predict **driver pay** for
 ---
 
 ## 🗂️ Repo Layout & How to Reproduce  
+
+```text
+├── 01_Loading_Staging.ipynb        # Data ingestion and staging for EDA
+├── 02_EDA_Feature_Engg.ipynb       # EDA & feature engineering  
+├── 03_Model_Training.ipynb         # Linear Regression (OLS)  
+├── 03a_Model_Training_Trees.ipynb  # LightGBM  
+├── 04_New_data_Predictions.ipynb   # Linear Regression predictions  
+├── 04a_New_Data_Predictions.ipynb  # LightGBM predictions  
+├── CONFIG_ENV.md                   # Environment & config guide  
+├── requirements.txt                # Pinned dependencies  
+
+---
+
+**Setup:**  
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+python -m venv venv
+source venv/bin/activate   # macOS/Linux
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+
+Run notebooks in order for full pipeline reproduction.
