@@ -15,7 +15,8 @@
 - 📈 Linear Regression (OLS) Model  
 - 🌲 LightGBM Model  
 - 🧪 Predictions on New Data  
-- 🍪 Caveats & Scales  
+- 🍪 Caveats & Scales
+- 🏗️ Fabric Environment & Setup  
 - 🚀 Recommendations & Next Steps  
 - 🗂️ Repo Layout & How to Reproduce  
 - ✨ Closing Thoughts  
@@ -58,7 +59,7 @@ This repo contains an end-to-end ML pipeline built to predict **driver pay** for
 - High-impact features: `trip_time`, `tips`, `tolls`, `congestion_surcharge`, `airport_fee`.  
 - Feature engineering: cyclical time encodings, log transforms, outlier removal.  
 
-📊 *See [`02_EDA_Feature_Engg.ipynb`](02_EDA_Feature_Engg.ipynb).*  
+📊 *See [`02_EDA_Feature_Engg.ipynb`](/notebooks/02_EDA_Feature_Engg.ipynb).*  
 
 ---
 
@@ -70,7 +71,7 @@ This repo contains an end-to-end ML pipeline built to predict **driver pay** for
   - R² = 0.90  
 
 ✅ Interpretable baseline, useful for explainability.  
-📊 *See [`03_Model_Training.ipynb`](03_Model_Training.ipynb).*  
+📊 *See [`03_Model_Training.ipynb`](/notebooks/03_Model_Training.ipynb).*  
 
 ---
 
@@ -80,7 +81,7 @@ This repo contains an end-to-end ML pipeline built to predict **driver pay** for
 - Predictions on new data: MAE = 1.44, RMSE = 3.81, R² = 0.96.  
 
 ✅ Outperforms Linear Regression; robust to non-linearities.  
-📊 *See [`03a_Model_Training_Trees.ipynb`](03a_Model_Training_Trees.ipynb).*  
+📊 *See [`03a_Model_Training_Trees.ipynb`](/notebooks/03a_Model_Training_Trees.ipynb).*  
 
 ---
 
@@ -92,8 +93,8 @@ This repo contains an end-to-end ML pipeline built to predict **driver pay** for
 | LightGBM | 13.8 | 14.0 | More accurate |
 
 📊 *See prediction notebooks for detailed plots:*  
-- [`04_New_data_Predictions.ipynb`](04_New_data_Predictions.ipynb)  
-- [`04a_New_Data_Predictions.ipynb`](04a_New_Data_Predictions.ipynb)  
+- [`04_New_data_Predictions.ipynb`](/notebooks/04_New_data_Predictions.ipynb)  
+- [`04a_New_Data_Predictions.ipynb`](/notebooks/04a_New_Data_Predictions.ipynb)  
 
 ---
 
@@ -102,6 +103,24 @@ This repo contains an end-to-end ML pipeline built to predict **driver pay** for
 - **LightGBM** results (RMSE ≈ 3.4–3.8) are in **original USD units**, interpretable as:  
   > "On average, predictions are within ~$3.80 of actual driver pay."  
 - ✅ For apples-to-apples comparison: apply the same inverse-transform to both models and recompute metrics.  
+
+---
+
+## 🏗️ Fabric Environment & Setup  
+
+This project was run entirely on **Microsoft Fabric trial capacity**, which ensures scalability and enterprise-grade reproducibility.  
+
+### 🚀 Fabric Trial Setup  
+1. Sign up at [https://fabric.microsoft.com](https://fabric.microsoft.com).  
+2. Create a **Workspace** (e.g., `nyc-taxi-ml`) and assign **trial capacity**.  
+3. Enable the **Data Science** experience.  
+
+### 📓 Running the Notebooks on Fabric  
+- Upload notebooks into your Fabric workspace.  
+- Open in **Fabric Data Science** → run sequentially (`02_EDA...` → `04a_New_Data...`).  
+- Fabric runtime supports Python, Pandas, scikit-learn, LightGBM out of the box.  
+
+📑 For full instructions, see [`CONFIG_ENV.md`](CONFIG_ENV.md).  
 
 ---
 
