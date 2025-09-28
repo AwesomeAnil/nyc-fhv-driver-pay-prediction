@@ -1,4 +1,4 @@
-# 🚖 NYC For-Hire Vehicle Pay Prediction
+# 🚖 NYC For-Hire Driver Pay Prediction
 
 > **Portfolio Project:** Combining advanced machine learning with stakeholder-focused insights to predict and optimize driver pay for NYC For-Hire Vehicles.
 
