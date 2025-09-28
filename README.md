@@ -1,4 +1,4 @@
-# 🚖 Predicting High-Volume NYC Taxi Trips  
+# 🚖 Predicting Driver Pay for High-Volume NYC Taxi Trips  
 *From Exploratory Analysis to Predictive Modeling*  
 
 [![Python](https://img.shields.io/badge/Python-3.9%2B-blue)]()  
