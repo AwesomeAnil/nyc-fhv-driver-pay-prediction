@@ -1,61 +1,158 @@
-# 🚖 NYC For-Hire Driver Pay Prediction
+# 🚖 Predicting Driver Pay for High-Volume NYC Taxi Trips  
+*From Exploratory Analysis to Predictive Modeling*  
 
-> **Portfolio Project:** Combining advanced machine learning with stakeholder-focused insights to predict and optimize driver pay for NYC For-Hire Vehicles.
-
----
-
-## 🌟 Executive Summary
-
-This project establishes a data-driven solution to a multi-billion dollar problem: predicting driver pay in the New York City for-hire vehicle market. By leveraging a massive dataset of over **10 million trips**, we developed a predictive model that significantly improves upon traditional methods. Our final model, built using **LightGBM**, achieved an impressive performance, reducing the average prediction error by **more than 40%** compared to a standard linear model. This predictive capability can serve as a core component of a platform to optimize driver earnings, improve operational efficiency, and create a multi-million dollar valuation for a data-driven service in the gig economy.
+[![Python](https://img.shields.io/badge/Python-3.9%2B-blue)]()  
+[![Machine Learning](https://img.shields.io/badge/ML-LightGBM%20%7C%20Linear%20Regression-green)]()  
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)]()  
 
 ---
 
-## 🚀 Workflow
-
-1.  **EDA & Feature Engineering**
-    * Explored a dataset of **10.6 million records** and **81 features** to understand key patterns in driver earnings.
-    * Engineered high-impact features such as `time_of_day` and `is_weekend` to capture temporal demand and cost drivers.
-
-2.  **Model Training & Evaluation**
-    * Developed and benchmarked a simple **Linear Regression** model against a more advanced **LightGBM** model.
-    * Evaluated models using key metrics like **R-squared (R²)**, **Root Mean Squared Error (RMSE)**, and **Mean Absolute Error (MAE)**.
-
-3.  **Predictions on New Data**
-    * Applied the trained LightGBM model to unseen data to demonstrate its ability to provide accurate and reliable predictions for new trips.
-
----
-
-## 📊 Results (Technical)
-
-* **Best-performing model:** **LightGBM**
-* **Key Metrics:**
-    * **R²:** 0.84
-    * **MAE:** \$1.10
-* The LightGBM model **significantly outperformed** the Linear Regression baseline, which had an MAE of \$2.50. This represents a **43% improvement** in prediction accuracy.
+## 📑 Table of Contents  
+- 🎯 Executive Summary  
+- 📊 Key Results at a Glance  
+- 💼 Business Value & Use Cases  
+- 🔍 EDA Highlights  
+- 📈 Linear Regression (OLS) Model  
+- 🌲 LightGBM Model  
+- 🧪 Predictions on New Data  
+- 🍪 Caveats & Scales
+- 🏗️ Fabric Environment & Setup  
+- 🚀 Recommendations & Next Steps  
+- 🗂️ Repo Layout & How to Reproduce  
+- ✨ Closing Thoughts  
 
 ---
 
-## 💼 Business Impact (Stakeholder Lens)
+## 🎯 Executive Summary  
+This repo contains an end-to-end ML pipeline built to predict **driver pay** for NYC high-volume taxi trips.  
 
-* **Revenue Forecasting:** Provides operators with foresight into trip-level driver pay, enabling better financial planning.
-* **Operational Optimization:** Helps in optimizing driver routes and schedules to maximize total earnings and improve efficiency.
-* **Strategic Advantage:** Offers a competitive edge in a crowded market by providing superior tools to drivers and fleet managers.
-* **Decision Enablement:** Demonstrates how AI/ML insights can be embedded into core business functions to drive tangible value.
-
----
-
-## 🛠 Tech Stack
-
-* **Microsoft Fabric:** Lakehouse, Spark, Delta tables, ML notebooks
-* **Python:** pandas, scikit-learn, matplotlib, seaborn, lightgbm
-* **ML Principles:** Feature engineering, model validation, prediction pipelines
+- **Business case:** Optimize driver allocation & reduce idle time.  
+- **Technical case:** Rigorous workflow from EDA → Feature Engineering → Model Training → Predictions.  
+- **Investor case:** Predictive intelligence drives efficiency in ride-hailing, logistics, and mobility — a **multi-billion-dollar opportunity**.  
 
 ---
 
-## 📈 Visuals
+## 📊 Key Results at a Glance  
 
-* 
-* 
-* 
+| Stage | Model | MAE | MSE | RMSE | R² | Source |
+|---|---:|---:|---:|---:|---:|---|
+| Training | Linear Regression (OLS) | — | — | — | **0.901** | `03_Model_Training` |
+| Predictions (new data) | Linear Regression | **0.16** | **0.05** | **0.21** | **0.90** | `04_New_data_Predictions` |
+| Training | LightGBM | — | — | **3.41** | ~0.88 | `03a_Model_Training_Trees` |
+| Eval | LightGBM | **1.56** | — | **3.41** | **0.9676** | `03a_Model_Training_Trees` |
+| Predictions (new data) | LightGBM | **1.44** | **14.54** | **3.81** | **0.96** | `04a_New_Data_Predictions` |
+
+⚠️ *Note: Linear regression metrics are on a transformed target; LightGBM metrics are in original currency units (USD). See [🍪 Caveats & Scales](#-caveats--scales).*  
 
 ---
+
+## 💼 Business Value & Use Cases  
+- **Operational forecasting:** Optimize driver allocation & payouts.  
+- **Pricing & margin:** Inform commission/incentive strategies.  
+- **Fraud detection:** Spot anomalies in payouts.  
+- **Investor story:** Demonstrates production-ready ML with measurable ROI.  
+
+---
+
+## 🔍 EDA Highlights  
+- Target `driver_pay` (raw): mean ≈ 21.13, count ≈ 2.5M trips.  
+- High-impact features: `trip_time`, `tips`, `tolls`, `congestion_surcharge`, `airport_fee`.  
+- Feature engineering: cyclical time encodings, log transforms, outlier removal.  
+
+📊 *See [`02_EDA_Feature_Engg.ipynb`](/notebooks/02_EDA_Feature_Engg.ipynb).*  
+
+---
+
+## 📈 Linear Regression (OLS) Model  
+- **R² = 0.901** (training, OLS summary).  
+- Predictions on new data:  
+  - MAE = 0.16  
+  - RMSE = 0.21  
+  - R² = 0.90  
+
+✅ Interpretable baseline, useful for explainability.  
+📊 *See [`03_Model_Training.ipynb`](/notebooks/03_Model_Training.ipynb).*  
+
+---
+
+## 🌲 LightGBM Model  
+- Training best valid RMSE ≈ **3.41**.  
+- Evaluation (test set): MAE ≈ 1.56, RMSE ≈ 3.41, R² ≈ 0.9676.  
+- Predictions on new data: MAE = 1.44, RMSE = 3.81, R² = 0.96.  
+
+✅ Outperforms Linear Regression; robust to non-linearities.  
+📊 *See [`03a_Model_Training_Trees.ipynb`](/notebooks/03a_Model_Training_Trees.ipynb).*  
+
+---
+
+## 🧪 Predictions on New Data  
+
+| Model | Predicted | Actual | Notes |
+|-------|-----------|--------|-------|
+| Linear Regression | 14.2 | 15.0 | Baseline |
+| LightGBM | 13.8 | 14.0 | More accurate |
+
+📊 *See prediction notebooks for detailed plots:*  
+- [`04_New_data_Predictions.ipynb`](/notebooks/04_New_data_Predictions.ipynb)  
+- [`04a_New_Data_Predictions.ipynb`](/notebooks/04a_New_Data_Predictions.ipynb)  
+
+---
+
+## 🍪 Caveats & Scales  
+- **Linear Regression** results (RMSE = 0.21) are reported on a **transformed target**.  
+- **LightGBM** results (RMSE ≈ 3.4–3.8) are in **original USD units**, interpretable as:  
+  > "On average, predictions are within ~$3.80 of actual driver pay."  
+- ✅ For apples-to-apples comparison: apply the same inverse-transform to both models and recompute metrics.  
+
+---
+
+## 🏗️ Fabric Environment & Setup  
+
+This project was run entirely on **Microsoft Fabric trial capacity**, which ensures scalability and enterprise-grade reproducibility.  
+
+### 🚀 Fabric Trial Setup  
+1. Sign up at [https://fabric.microsoft.com](https://fabric.microsoft.com).  
+2. Create a **Workspace** (e.g., `nyc-taxi-ml`) and assign **trial capacity**.  
+3. Enable the **Data Science** experience.  
+
+### 📓 Running the Notebooks on Fabric  
+- Upload notebooks into your Fabric workspace.  
+- Open in **Fabric Data Science** → run sequentially (`02_EDA...` → `04a_New_Data...`).  
+- Fabric runtime supports Python, Pandas, scikit-learn, LightGBM out of the box.  
+
+📑 For full instructions, see [`CONFIG_ENV.md`](CONFIG_ENV.md).  
+
+---
+
+## 🚀 Recommendations & Next Steps  
+1. Add a canonical comparison notebook (inverse-transformed metrics for both models).  
+2. Integrate SHAP explainability for LightGBM.  
+3. Package model inference with FastAPI for deployment.  
+4. Build a one-page investor pitch: Problem → Solution → KPI → ROI.  
+
+---
+
+## 🗂️ Repo Layout & How to Reproduce  
+
+```text
+├── 01_Loading_Staging.ipynb        # Data ingestion and staging for EDA
+├── 02_EDA_Feature_Engg.ipynb       # EDA & feature engineering  
+├── 03_Model_Training.ipynb         # Linear Regression (OLS)  
+├── 03a_Model_Training_Trees.ipynb  # LightGBM  
+├── 04_New_data_Predictions.ipynb   # Linear Regression predictions  
+├── 04a_New_Data_Predictions.ipynb  # LightGBM predictions  
+├── CONFIG_ENV.md                   # Environment & config guide  
+├── requirements.txt                # Pinned dependencies  
+
+---
+
+**Setup:**  
+```bash
+git clone https://github.com/<your-username>/<your-repo>.git
+cd <your-repo>
+python -m venv venv
+source venv/bin/activate   # macOS/Linux
+venv\Scripts\activate      # Windows
+pip install -r requirements.txt
+
+Run notebooks in order for full pipeline reproduction.
