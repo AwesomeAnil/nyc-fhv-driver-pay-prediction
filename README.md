@@ -192,33 +192,58 @@ pip install -r docs/Requirements.txt
 
 ```
 FabricWorkspace/
+├── Tables/
+│   ├── dbo/
+│   │       ├── final_df
+│   │       ├──final_dflgbm
+│   │       ├──trained_final_df
+│   │       ├──trained_final_df_lgbm
+│   │       ├──training_df
+│   │       ├──trip_data_202506
+
 ├── Files/
 │   ├── uploads/
 │   │       ├── 2025-06_sample.csv
 │   │       └── 2025-07_full.csv
 │   ├── raw/
+│   │       ├──week_27.parquet
+│   │       ├──week_28.parquet
+│   │       ├──week_29.parquet
+│   │       ├──week_30.parquet
+│   │       ├──week_31.parquet
+│   ├── new/
+│   │       ├──week_27.parquet
+│   │       ├──week_28.parquet
+│   │       ├──week_29.parquet
+│   │       ├──week_30.parquet
+│   │       ├──week_31.parquet
+│   ├── train/
 │   │   └── nytaxi/
-│   │       ├── fhvhv_tripdata_2025-06.parquet
-│   │       └── fhvhv_tripdata_2025-07.parquet
-│   ├── staged/
-│   │   └── nytaxi/
-│   │       ├── 01_ingested.csv
 │   │       └── 02_feature_engineered.csv
 │   └── engineered/
-│       └── nytaxi/
-│           ├── 03_ols_ready.csv
-│           ├── 03a_lgb_ready.csv
-│           └── 04a_predictions.csv
+│           ├── train_df1.parquet
+│           ├──train_df6.parquet
+│   └── holdout/
+│           ├── data.parquet
+│   ├── predictions/
+│   │       ├──final_df.parquet
+│   │       ├──final_df_lgbm.parquet
+│   └── models/
+│           ├── one_hot_encoder.joblib
+│           ├── standard_scaler_base_pax_fare.pkl
+│           ├── lr_sklearn.pkl
+│           ├── LightGBM_model.pkl
 ├── Notebooks/
 │   ├── 01_Loading_Staging.ipynb
 │   ├── 02_EDA_Feature_Engg.ipynb
 │   ├── 03_Model_Training.ipynb
 │   ├── 03a_Model_Training_Trees.ipynb
 │   └── 04a_New_Data_Predictions.ipynb
-├── Config/
-│   └── CONFIG_ENV.md
-└── images/
-    ├── All visuals for README & presentation
+
+├── Power BI App/
+│   ├── Training data report                  # showing prediction accuracy of driver pay on both train and test series.
+│   ├── Predictions report                    # for weeks 27-31 
+
 ```
 ---
 
