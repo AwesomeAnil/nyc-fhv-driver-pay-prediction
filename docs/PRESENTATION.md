@@ -75,9 +75,13 @@
 
 ![Base Passenger Fares](/images/Univariate_base_pax_fare.png)
 
-#### *📊 Bivariate - Driver Pay Scatter & Box Plots*
+#### *📊 Bivariate - Driver Pay Scatter Plots*
 
-![Driver Pay Scatter & Box](/images/bivariate_driver_pay_scatter_plots.png)
+![Driver Pay Scatter plots](/images/bivariate_driver_pay_scatter_plots.png)
+
+#### *📊 Bivariate - Driver Pay vs. categorical features Box Plots*
+
+![Driver Pay Box Plots](/images/bivariate_driver_pay_box_plots.png)
 
 ---
 
@@ -103,18 +107,20 @@
 
 # 🤖 Model Building
 
-📊 **Performance Benchmarking:**
+📊 **Performance Benchmarking Across Models**
 
-| Model             | RMSE     | R²        | Notes                             |
-| ----------------- | -------- | --------- | --------------------------------- |
-| Linear Regression | ~0.21    | **0.90**  | Interpretable baseline            |
-| LightGBM          | **3.41** | 0.968     | Best performer, handles non-linearities |
+| Model             | Dataset / Stage      | MAE     | RMSE    | R²        | Notes |
+| ----------------- | ------------------ | ------- | ------- | --------- | ----- |
+| Linear Regression | Training (log-scale)| 0.16    | 0.21    | 0.90      | Transparent baseline; log-transformed target |
+| Linear Regression | June Sample         | 0.16    | 0.21    | 0.90      | Consistent validation; interpretable |
+| LightGBM          | Training            | 1.56    | 3.41    | 0.968     | Captures non-linear patterns; SHAP explainable |
+| LightGBM          | June Sample         | 1.44    | 3.81    | 0.96      | Robust on unseen data |
+| LightGBM          | July Full Month     | 1.44    | 3.81    | 0.96      | Production-scale scoring (~20.0M rows) |
 
-✅ **LightGBM recommended for production**  
-- Robust to non-linear relationships  
-- Performs well on full July 2025 dataset (~2.5M rows)
-
-[insert image: ./images/model_comparison.png]
+✅ **Key Takeaways:**  
+- Linear Regression provides **interpretable baseline** on log-transformed scale.  
+- LightGBM **outperforms** in absolute USD scale, robust to non-linearities, suitable for production deployment.  
+- Metrics are consistent from **training → sample validation → full-month prediction**.  
 
 ---
 
