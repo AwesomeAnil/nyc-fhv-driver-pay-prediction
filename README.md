@@ -20,7 +20,8 @@
 - 🏗️ Fabric Environment & Setup  
 - 🚀 Recommendations & Next Steps  
 - 🗂️ Repo Layout & How to Reproduce  
-- 🏗️ Fabric Capacity Folder Views  
+- 🏗️ Fabric Capacity Folder Views
+- 🗂️ Documentation
 - ✨ Closing Thoughts  
 
 ---
@@ -243,6 +244,20 @@ FabricWorkspace/
 ├── Power BI App/
 │   ├── Training data report                  # showing prediction accuracy of driver pay on both train and test series.
 │   ├── Predictions report                    # for weeks 27-31 
+
+```
+---
+
+## 🏗️ Documentation
+
+```
+GitHub/
+├── README.md/
+│   ├── docs/
+│   │       ├── Configuation.md            # For instructions on how to setup Environment, python dependencies, data requirements, fabric trial capacity
+│   │       ├── EXEC_1Pager.md             # 1-page snapshot with story of problem - solution - impact for non-technical execs. 
+│   │       ├── PRESENTATION.MD            # Detailed Presentation for both technical & non-technical stakeholders.
+│   │       ├── Requirements.txt           # Python libraries and versions.
 
 ```
 ---
