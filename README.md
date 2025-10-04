@@ -33,6 +33,7 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 - **Investor case:** Demonstrates predictive intelligence for driver economics — a critical lever in the multi-billion-dollar mobility industry.  
 
 [insert image: summary diagram, e.g., end-to-end workflow]  
+[ML Workflow](/iamges/ML_workflow.png)
 
 ---
 
