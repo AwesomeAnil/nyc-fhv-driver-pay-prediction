@@ -129,7 +129,7 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 
 #### *Predicted vs. Actual* 
 
-1{Predicted vs. Actuals](images/predicted_vs_actual.png)
+![Predicted vs. Actuals](images/predicted_vs_actual.png)
 
 ---
 
@@ -150,7 +150,8 @@ Built entirely on **Microsoft Fabric trial capacity**.
 
 **Dependencies:** Python 3.9+, Pandas, NumPy, scikit-learn, LightGBM  
 
-[insert image: optional Fabric workspace screenshot]  
+#### *Fabric Workspace* 
+![Fabric Workspace](images/fabric_workspace.png)
 
 ---
 
@@ -160,8 +161,6 @@ Built entirely on **Microsoft Fabric trial capacity**.
 3. Deploy LightGBM model via **FastAPI** for real-time scoring  
 4. Implement drift monitoring and error-tracking dashboards in Fabric  
 5. Develop one-page **investor pitch** linking model performance to business ROI  
-
-[insert image: optional recommendations diagram]  
 
 ---
 
@@ -176,6 +175,7 @@ Built entirely on **Microsoft Fabric trial capacity**.
 ├── images/                    # All image files linked in README & presentation
 ├── powerbi/                   # PDF exports of Power BI reports
 ├── sample_data/               # CSVs: source, training, modeled, predictions
+├── notebooks/                 # Python notebooks saved as .html
 
 Setup: 
 
@@ -193,10 +193,13 @@ pip install -r docs/Requirements.txt
 ```
 FabricWorkspace/
 ├── Files/
-│   ├── raw/
-│   │   └── nytaxi/
+│   ├── uploads/
 │   │       ├── 2025-06_sample.csv
 │   │       └── 2025-07_full.csv
+│   ├── raw/
+│   │   └── nytaxi/
+│   │       ├── fhvhv_tripdata_2025-06.parquet
+│   │       └── fhvhv_tripdata_2025-07.parquet
 │   ├── staged/
 │   │   └── nytaxi/
 │   │       ├── 01_ingested.csv
