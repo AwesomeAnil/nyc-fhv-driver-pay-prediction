@@ -32,8 +32,8 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 - **Technical case:** Robust workflow: Data Ingestion → EDA → Feature Engineering → Model Training → Predictions.  
 - **Investor case:** Demonstrates predictive intelligence for driver economics — a critical lever in the multi-billion-dollar mobility industry.  
 
-[insert image: summary diagram, e.g., end-to-end workflow]  
-[ML Workflow](/iamges/ML_workflow.png)
+#### *ML Workflow* 
+![ML Workflow](/images/ML_workflow.png)
 
 ---
 
@@ -47,8 +47,6 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 | Predictions (June sample) | LightGBM | 1.44 | 3.81 | **0.96** | Notebooks |
 | Predictions (July full month) | LightGBM | 1.44 | 3.81 | **0.96** | Notebooks |
 
-[insert image: ./images/model_performance_comparison.png]  
-
 ---
 
 ## 💼 Business Value & Use Cases  
@@ -56,8 +54,6 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 - **Pricing strategy:** Guide commissions and incentive design.  
 - **Fraud detection:** Identify anomalous trips or payments.  
 - **Investor story:** Production-grade ML with measurable ROI.  
-
-[insert image: ./images/business_kpi_dashboard.png]  
 
 ---
 
@@ -68,7 +64,9 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 - **Platform:** Microsoft Fabric Lakehouse, staged as CSV and parquet files.  
 - **Quality checks:** Schema validation, invalid row removal (`driver_pay <= 0`, `base_passenger_fare <= 0`).  
 
-[insert image: ./images/data_volume_quality.png]  
+#### *Initial Data Summary for July 2025*
+
+![Data Summary](images/data_quality.png)
 
 ---
 
@@ -82,8 +80,11 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
   - Categorical encoding: vendors, pickup/drop zones  
 - **Result:** Gaussian-like distributions and improved correlation alignment with target variable.  
 
-[insert image: ./images/driver_pay_distribution.png]  
-[insert image: ./images/correlation_heatmap.png]  
+#### *Driver Pay Distributions*
+![Driver Pay Distributions](images/Univariate_driver_pay.png)
+
+#### *Correlations Heat Map*
+![Correlations heat map](/images/Correlations_heat_map.png)
 
 ---
 
@@ -96,7 +97,8 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
   - RMSE = 0.21 (log scale)  
 - **Value:** Transparent, interpretable baseline for business teams.  
 
-[insert image: ./images/ols_coefficients.png]  
+#### *Model Summary* 
+![LR Model Summary](images/OLS_Regression_Results.png)
 
 ---
 
@@ -112,8 +114,8 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
   - **Shared rides:** reduce predicted pay  
 - **Value:** Non-linear model with strong predictive power & explainability.  
 
-[insert image: ./images/shap_summary.png]  
-[insert image: ./images/shap_dependence.png]  
+#### *SHAP Feature Importance* 
+![SHAP Feature Importance](images/shap_feature_importance.png)
 
 ---
 
@@ -125,7 +127,9 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
   - R² ≈ 0.96  
 - **Business interpretation:** Predictions within ~$3.80 of actual pay on average.  
 
-[insert image: ./images/july_predictions_actuals.png]  
+#### *Predicted vs. Actual* 
+
+1{Predicted vs. Actuals](images/predicted_vs_actual.png)
 
 ---
 
@@ -133,8 +137,6 @@ This repository presents an **end-to-end ML workflow** to predict **driver pay**
 - Linear regression metrics are log-transformed; interpret carefully.  
 - LightGBM metrics are in USD — directly actionable.  
 - Excluded features: base fares, tips, sales tax — ensures realistic **pre-trip prediction**.  
-
-[insert image: optional diagram for feature selection]  
 
 ---
 
