@@ -11,8 +11,8 @@
 * 🔍 Exploratory Data Analysis (EDA)
 * 🛠️ Feature Engineering
 * 🤖 Model Building
-* 📊 Predictions on New Data
-* 🔑 Feature Importance (LightGBM)
+* 📊 Predictions on July 2025 Data
+* 🔑 Feature Importance (LightGBM & SHAP)
 * 💡 Business Impact
 * ⚙️ Technical Excellence
 * ✨ Closing Thoughts
@@ -22,8 +22,11 @@
 # 🎯 Vision & Business Case
 
 * Urban mobility is a **multi-billion-dollar market**.
-* Optimizing **fleet allocation & demand forecasting** is critical for profitability.
-* This project demonstrates how **raw data → features → ML models → business impact**.
+* Predicting **driver pay before trips** ensures:
+  - Operational efficiency
+  - Fair driver income
+  - Optimized fleet allocation
+* Demonstrates how **raw data → features → ML models → actionable business insights**.
 
 💡 *Predictive intelligence = higher ROI + smarter cities.*
 
@@ -31,17 +34,20 @@
 
 # 🌍 End-to-End ML Pipeline
 
-```mermaid
-graph LR
-A[Raw Taxi Data] --> B[EDA & Feature Engineering]
-B --> C[Model Training: Linear Regression]
-B --> D[Model Training: LightGBM]
-C --> E[Predictions on New Data]
-D --> F[Predictions on New Data]
-```
+**Workflow Summary:**
 
-* **Comprehensive workflow**: Data → Insights → Models → Predictions
-* **Dual approach**: Baseline (Linear Regression) + Advanced (LightGBM)
+1. **Raw NYC Taxi Data**
+2. **Data Ingestion & Staging** → Microsoft Fabric Lakehouse
+3. **EDA & Feature Engineering** → Clean, business-aligned features
+4. **Model Training**
+   - Linear Regression (baseline)
+   - LightGBM (advanced, non-linear)
+5. **Predictions on New Data** → July 2025 full-month scoring (~2.5M trips)
+6. **Business Insights & Dashboards** → Operational decisions, ROI visualization
+
+*Dual approach ensures robust baseline + production-grade predictive performance.*
+
+![ML Workflow](/images/ML_workflow.png)
 
 ---
 
@@ -57,52 +63,41 @@ D --> F[Predictions on New Data]
 | Trip Distance   | Long-tail distribution      | Outlier removal essential   |
 | Passenger Count | Weak predictor              | Dropped as feature          |
 
-<ins>**Descriptive Stats - Initial Data**</ins> 
+#### *Descriptive Stats - Initial Data*
 
 ![Descriptive Stats](/images/describe_stats.png)
 
-<ins>**Univariate - Driver Pay Distribution**</ins>
+#### *📊 Driver Pay Distribution*
 
-![Univariate Pay Distributions](/images/Univariate_driver_pay.png)
+![Driver Pay Distribution](/images/Univariate_driver_pay.png)
 
-<ins>**Univariate - Base Passenger Fares Distribution**</ins> 
+#### *📊 Trip Fares Distribution*
 
-![Univariate Fares Distribution](/images/Univariate_base_pax_fare.png)
+![Base Passenger Fares](/images/Univariate_base_pax_fare.png)
 
-<ins>**Bivariate - Driver Pay Scatter Plots**</ins> 
+#### *📊 Bivariate - Driver Pay Scatter & Box Plots*
 
-![Driver Pay Scatterokits](/images/bivariate_driver_pay_scatter_plots.png)
-
-<ins>**Bivariate - Driver Pay Box Plots**</ins> 
-
-![Driver Pay Boxplots](/images/bivariate_driver_pay_box_plots.png)
-
-
-📊 *[Attach histogram of trips by hour]*
-📊 *[Attach geospatial heatmap of pickup zones]*
+![Driver Pay Scatter & Box](/images/bivariate_driver_pay_scatter_plots.png)
 
 ---
 
 # 🛠️ Feature Engineering
 
-* Cyclical encoding of **time features** (hour, day of week).
-* **Log transformation** of trip distance (reduce skew).
-* **Categorical encoding** of Vendor IDs & zones.
-* **Outlier filtering**: trips > 50 miles or > 2 hours removed.
+* Cyclical encoding of **time features** (hour, day-of-week)
+* **Log transformation** of trip distance and trip time
+* **Categorical encoding** for vendor IDs & pickup/drop zones
+* **Outlier removal:** trips > 50 miles or > 2 hours
+* **Post-trip revenue fields excluded** (tips, sales tax, base fare) → realistic pre-trip prediction
 
-<ins>**Descriptive Stats after log-transformation and standard scaling**</ins> 
+#### *📊 Descriptive Stats after Transformations*
 
-![Descriptive Stats](/images/describe_stats_logtransformed_scaled.png)
+![Descriptive Stats Transformed](/images/describe_stats_logtransformed_scaled.png)
 
-<ins>**Boxplots after transformations**</ins> 
+#### *📊 Feature Correlations Heat Map*
 
-![Boxplots after data transformations](/images/univariate_boxplots_logtransformed_scaled.png)
+![Correlations Heat Map](/images/Correlations_heat_map.png)
 
-<ins>**Feature correlations heat map**</ins>
-
-![Correlations heat map](/images/Correlations_heat_map.png)
-
-✨ *Cleaner, business-aligned features powering better predictions.*
+✨ *Business-aligned, clean features powering robust predictions.*
 
 ---
 
@@ -110,79 +105,88 @@ D --> F[Predictions on New Data]
 
 📊 **Performance Benchmarking:**
 
-| Model             | RMSE     | R²        | Notes                  |
-| ----------------- | -------- | --------- | ---------------------- |
-| Linear Regression | ~7.8     | **0.901** | Interpretable baseline |
-| LightGBM          | **3.41** | ~0.88     | Best performer         |
+| Model             | RMSE     | R²        | Notes                             |
+| ----------------- | -------- | --------- | --------------------------------- |
+| Linear Regression | ~0.21    | **0.90**  | Interpretable baseline            |
+| LightGBM          | **3.41** | 0.968     | Best performer, handles non-linearities |
 
-📈 *[Attach RMSE comparison bar chart]*
+✅ **LightGBM recommended for production**  
+- Robust to non-linear relationships  
+- Performs well on full July 2025 dataset (~2.5M rows)
 
-✅ **LightGBM recommended for production** (captures complex patterns).
-
----
-
-# 📊 Predictions on New Data
-
-🎯 **Validation on unseen trips:**
-
-| Model             | Predicted | Actual | Notes                       |
-| ----------------- | --------- | ------ | --------------------------- |
-| Linear Regression | 14.2      | 15.0   | Baseline: moderate accuracy |
-| LightGBM          | 13.8      | 14.0   | High accuracy, robust       |
-
-📊 *[Attach Actual vs Predicted line chart]*
-
-💡 **Impact**: More accurate predictions → optimized driver allocation → better margins.
+[insert image: ./images/model_comparison.png]
 
 ---
 
-# 🔑 Feature Importance (LightGBM)
+# 📊 Predictions on July 2025 Data
 
-📊 **Top Predictive Drivers:**
+🎯 **Validation on unseen July trips:**
 
-| Feature              | Importance |
-| -------------------- | ---------- |
-| Trip Time            | ⭐⭐⭐⭐⭐      |
-| Pickup Zone          | ⭐⭐⭐⭐       |
-| Congestion Surcharge | ⭐⭐⭐        |
-| Day of Week          | ⭐⭐         |
-| Shared Ride Flag     | ⭐          |
+| Model             | MAE      | RMSE    | R²        | Notes                       |
+| ----------------- | -------- | ------- | --------- | --------------------------- |
+| Linear Regression | 0.16     | 0.21    | 0.90      | Baseline                     |
+| LightGBM          | 1.44     | 3.81    | 0.96      | High accuracy, scalable      |
 
-*[Attach LightGBM feature importance plot]*
+💡 **Impact**: Enables operational optimization, dynamic fleet allocation, and more accurate financial forecasting
 
-✅ Clear signals: demand is driven by **time, location, and congestion factors**.
+[insert image: ./images/july_predictions_actuals.png]
+#### *Predicted Pay vs. Actual Pay* 
+
+![Predicted vs. Actuals](/images/predicted_vs_actual.png)
+
+---
+
+# 🔑 Feature Importance (LightGBM & SHAP)
+
+📊 **Top Predictive Features:**
+
+| Feature              | Impact                      |
+| -------------------- | --------------------------- |
+| Trip Time            | Largest driver of pay       |
+| Pickup Zone          | Geographic demand variations|
+| Congestion Surcharge | Increases payouts           |
+| Day of Week          | Peaks & weekends increase pay|
+| Shared Ride Flag     | Reduces payouts             |
+
+✅ Insights actionable for operations: schedule drivers, set surge pricing, optimize incentives
+
+#### *SHAP - Feature Importance*
+
+![SHAP - Feature Importance](/images/shap_feature_importance.png)
 
 ---
 
 # 💡 Business Impact
 
-* 📈 **Operational Efficiency:** Reduce idle time, improve trip matching.
-* 💰 **Revenue Growth:** Anticipate demand → dynamic pricing.
-* 😀 **Customer Satisfaction:** Faster pickups, fewer cancellations.
-* 🌍 **Scalability:** Extendable to ride-hailing, logistics, delivery.
+* 📈 **Operational Efficiency:** Reduce idle time, improve trip matching
+* 💰 **Revenue Growth:** Anticipate demand, dynamic pricing
+* 😀 **Driver Satisfaction:** Predictable payouts, fair allocation
+* 🌍 **Scalability:** Extendable to ride-hailing, logistics, delivery
+* 🔄 **Pre-trip prediction:** Enables actionable decision-making before trips start
+
+[insert image: ./images/business_impact_summary.png]
 
 ---
 
 # ⚙️ Technical Excellence
 
-* **Stack:** Python, Pandas, NumPy, scikit-learn, LightGBM.
-* **Data Practices:** Outlier removal, encoding, scaling.
+* **Stack:** Python 3.9+, Pandas, NumPy, scikit-learn, LightGBM
+* **Data Practices:** Outlier removal, cyclical encoding, log transformation
 * **ML Rigor:**
-
-  * Linear Regression → R² = **0.901**
-  * LightGBM → RMSE = **3.41**
-* **Deployment-ready**: Pipeline structured for API/cloud.
+  - Linear Regression → R² = **0.90**
+  - LightGBM → RMSE ≈ 3.41, R² ≈ 0.968
+* **Deployment-ready:** Pipeline structured for API/cloud, scalable to millions of trips
 
 ---
 
 # ✨ Closing Thoughts
 
-🚖 **This is more than a project — it’s a blueprint for smart mobility.**
+🚖 **This project demonstrates end-to-end ML for urban mobility:**
 
-* For **investors & stakeholders** → tangible ROI, scalable market opportunity.
-* For **developers & ML engineers** → rigorous, end-to-end ML pipeline.
-* For **cities & mobility platforms** → data-driven forecasting for smarter operations.
+* For **investors & stakeholders** → tangible ROI, operational insights
+* For **engineers & ML teams** → full pipeline with reproducibility and SHAP explainability
+* For **mobility operators & regulators** → pre-trip predictions enabling smarter, fairer operations
 
-🔥 *This repository demonstrates not just machine learning — but the power of ML to transform industries.*
+🔥 *This repository is more than a model — it’s a blueprint for predictive intelligence at scale.*
 
 ---
